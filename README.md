@@ -56,3 +56,22 @@ Do komunikacji z API użyto `HttpClient` z `@angular/common/http`.
 Formularze posiadają walidację wymaganych pól:
 - Nazwa produktu - wymagana
 - Kod produktu - wymagany przy dodawaniu
+
+## Zdjęcia:
+
+- Lista produktów
+
+![img.png](img.png)
+
+- Szczegóły produktu
+
+![img_1.png](img_1.png)
+
+- Dodawanie produktu
+
+![img_2.png](img_2.png)
+
+- Edytowanie produktu
+
+![img_3.png](img_3.png)
+
