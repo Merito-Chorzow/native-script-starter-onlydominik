@@ -21,8 +21,38 @@ Zbuduj podstawową aplikację w **NativeScript używając framework Angular**, k
 - Pokaż komunikację z **API** (pobranie/zapis) i zachowanie przy błędach/uprawnieniach.
 
 ## Definition of Done (DoD)
-- [ ] 3–4 widoki + nawigacja.
-- [ ] Co najmniej 1 **natywna funkcja**.
-- [ ] Integracja z **API** (GET/POST).
-- [ ] Walidacja formularza + podstawowa obsługa błędów.
-- [ ] Aktualizacja `README.md`, zrzuty ekranów, min. 3 commity.
+- [x] 3–4 widoki + nawigacja.
+- [x] Co najmniej 1 **natywna funkcja**.
+- [x] Integracja z **API** (GET/POST).
+- [x] Walidacja formularza + podstawowa obsługa błędów.
+- [x] Aktualizacja `README.md`, zrzuty ekranów, min. 3 commity.
+
+---
+
+## Opis implementacji
+
+### Widoki
+Aplikacja posiada 4 widoki:
+1. **Lista produktów** - wyświetla produkty z nazwą, kodem i statusem dostępności
+2. **Szczegóły produktu** - pokazuje pełne informacje o produkcie, pozwala usunąć, edytować i zmienić status
+3. **Dodaj produkt** - formularz do dodawania nowego produktu ze zdjęciem
+4. **Edytuj produkt** - formularz do edycji istniejącego produktu
+
+### Natywna funkcja - Kamera
+Do robienia zdjęć produktów użyto biblioteki `@nativescript/camera`. Pozwala ona na:
+- Pobranie uprawnień do kamery (`requestCameraPermissions`)
+- Zrobienie zdjęcia (`takePicture`)
+
+### API
+Aplikacja komunikuje się z API `https://jsonplaceholder.typicode.com`:
+- **GET** `/posts?_limit=10` - pobieranie listy produktów
+- **POST** `/posts` - dodawanie nowego produktu
+- **PUT** `/posts/:id` - aktualizacja produktu
+- **DELETE** `/posts/:id` - usuwanie produktu
+
+Do komunikacji z API użyto `HttpClient` z `@angular/common/http`.
+
+### Walidacja
+Formularze posiadają walidację wymaganych pól:
+- Nazwa produktu - wymagana
+- Kod produktu - wymagany przy dodawaniu
