@@ -36,6 +36,11 @@ export class ProductDetailComponent {
     this.router.back();
   }
 
+  toggleStatus() {
+    this.productService.toggleStatus(this.product.id);
+    this.cd.detectChanges();
+  }
+
   editProduct() {
     this.router.navigate(['/edit', this.product.id]);
   }
@@ -44,3 +49,4 @@ export class ProductDetailComponent {
     this.router.back();
   }
 }
+

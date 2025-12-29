@@ -63,5 +63,12 @@ export class ProductService {
       userId: 1
     }).subscribe();
   }
+
+  toggleStatus(id: number) {
+    const product = this.products.find(p => p.id == id);
+    if (product) {
+      product.status = product.status === 'dostępny' ? 'niedostępny' : 'dostępny';
+    }
+  }
 }
 

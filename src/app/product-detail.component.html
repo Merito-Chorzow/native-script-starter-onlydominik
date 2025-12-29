@@ -1,9 +1,9 @@
-<ActionBar title="Szczegoly produktu">
-  <ActionItem text="Powrot" (tap)="goBack()"></ActionItem>
+<ActionBar title="Szczegóły produktu">
+  <ActionItem text="Powrót" (tap)="goBack()"></ActionItem>
 </ActionBar>
 
 <StackLayout *ngIf="!loaded" class="p-4">
-  <Label text="Ladowanie..." class="text-center"></Label>
+  <Label text="Ładowanie..." class="text-center"></Label>
 </StackLayout>
 
 <StackLayout *ngIf="loaded && errorMessage" class="p-4">
@@ -17,6 +17,7 @@
   <Label text="Opis:" class="font-bold mb-1"></Label>
   <Label [text]="product.description" textWrap="true" class="mb-4"></Label>
 
+  <Button text="Zmień status" (tap)="toggleStatus()" class="btn bg-yellow-500 text-white mb-2"></Button>
   <Button text="Edytuj" (tap)="editProduct()" class="btn btn-primary mb-2"></Button>
   <Button text="Usuń" (tap)="deleteProduct()" class="btn bg-red-500 text-white"></Button>
 </StackLayout>
