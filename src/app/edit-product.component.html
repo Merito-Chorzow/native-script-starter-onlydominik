@@ -1,14 +1,14 @@
 <ActionBar title="Edytuj produkt">
-  <ActionItem text="Powrot" (tap)="goBack()"></ActionItem>
+  <ActionItem text="Powrót" (tap)="goBack()"></ActionItem>
 </ActionBar>
 
 <StackLayout *ngIf="!loaded" class="p-4">
-  <Label text="Ladowanie..." class="text-center"></Label>
+  <Label text="Ładowanie..." class="text-center"></Label>
 </StackLayout>
 
 <StackLayout class="p-4" *ngIf="loaded">
   <Label text="Nazwa produktu:" class="mb-1"></Label>
-  <TextField [(ngModel)]="productName" hint="Wpisz nazwe" class="input border p-2 mb-4"></TextField>
+  <TextField [(ngModel)]="productName" hint="Wpisz nazwę" class="input border p-2 mb-4"></TextField>
 
   <Label text="Kod produktu:" class="mb-1"></Label>
   <TextField [(ngModel)]="productCode" hint="Wpisz kod" class="input border p-2 mb-4"></TextField>

@@ -2,7 +2,7 @@ import { Component, NO_ERRORS_SCHEMA, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NativeScriptCommonModule, NativeScriptFormsModule, RouterExtensions } from '@nativescript/angular';
-import { HttpClient } from '@angular/common/http';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -20,21 +20,20 @@ export class EditProductComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
+    private productService: ProductService,
     private router: RouterExtensions,
     private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.productId = this.route.snapshot.params['id'];
-    this.http.get('https://jsonplaceholder.typicode.com/posts/' + this.productId).subscribe((data: any) => {
-      this.productName = data.title.substring(0, 20);
-      this.productCode = 'PRD-' + data.id;
-      this.productDescription = data.body;
-      this.loaded = true;
-      this.cd.detectChanges();
-    }, (error) => {
-      this.errorMessage = 'Blad przy ladowaniu produktu';
+    this.productService.loadProducts().then(() => {
+      const product = this.productService.getProduct(this.productId);
+      if (product) {
+        this.productName = product.name;
+        this.productCode = product.code;
+        this.productDescription = product.description;
+      }
       this.loaded = true;
       this.cd.detectChanges();
     });
@@ -43,23 +42,19 @@ export class EditProductComponent {
   saveProduct() {
     if (this.productName === '') {
       this.errorMessage = 'Nazwa jest wymagana';
+      this.cd.detectChanges();
       return;
     }
 
-    const updatedProduct = {
-      id: this.productId,
-      title: this.productName,
-      body: this.productDescription,
-      userId: 1
-    };
-
-    this.http.put('https://jsonplaceholder.typicode.com/posts/' + this.productId, updatedProduct).subscribe(() => {
-      this.router.back();
+    this.productService.updateProduct(this.productId, {
+      name: this.productName,
+      code: this.productCode,
+      description: this.productDescription
     });
+    this.router.back();
   }
 
   goBack() {
     this.router.back();
   }
 }
-

@@ -1,10 +1,10 @@
-<ActionBar title="Lista Produktow"></ActionBar>
+<ActionBar title="Lista Produktów"></ActionBar>
 
 <StackLayout>
   <Button text="Dodaj produkt" [nsRouterLink]="['/add']" class="btn btn-primary m-4"></Button>
 
   <StackLayout *ngIf="!loaded" class="p-4">
-    <Label text="Ladowanie produktow..." class="text-center"></Label>
+    <Label text="Ładowanie produktów..." class="text-center"></Label>
   </StackLayout>
 
   <StackLayout *ngIf="loaded && errorMessage" class="p-4">

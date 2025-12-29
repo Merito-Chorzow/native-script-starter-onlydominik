@@ -1,10 +1,10 @@
 <ActionBar title="Dodaj produkt">
-  <ActionItem text="Powrot" (tap)="goBack()"></ActionItem>
+  <ActionItem text="Powrót" (tap)="goBack()"></ActionItem>
 </ActionBar>
 
 <StackLayout class="p-4">
   <Label text="Nazwa produktu:" class="mb-1"></Label>
-  <TextField [(ngModel)]="productName" hint="Wpisz nazwe" class="input border p-2 mb-4"></TextField>
+  <TextField [(ngModel)]="productName" hint="Wpisz nazwę" class="input border p-2 mb-4"></TextField>
 
   <Label text="Kod produktu:" class="mb-1"></Label>
   <TextField [(ngModel)]="productCode" hint="Wpisz kod" class="input border p-2 mb-4"></TextField>
@@ -12,7 +12,7 @@
   <Label text="Opis:" class="mb-1"></Label>
   <TextView [(ngModel)]="productDescription" hint="Wpisz opis" class="input border p-2 mb-4" height="100"></TextView>
 
-  <Button text="Zrob zdjecie" (tap)="takePhoto()" class="btn bg-blue-500 text-white mb-2"></Button>
+  <Button text="Zrób zdjęcie" (tap)="takePhoto()" class="btn bg-blue-500 text-white mb-2"></Button>
 
   <Image [src]="photoPath" *ngIf="photoPath" height="200" class="mb-4"></Image>
 

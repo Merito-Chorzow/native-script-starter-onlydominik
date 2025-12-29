@@ -1,8 +1,8 @@
 import { Component, NO_ERRORS_SCHEMA, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NativeScriptCommonModule, NativeScriptFormsModule, RouterExtensions } from '@nativescript/angular';
-import { HttpClient } from '@angular/common/http';
 import { requestCameraPermissions, takePicture } from '@nativescript/camera';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -17,7 +17,7 @@ export class AddProductComponent {
   photoPath: string = '';
   errorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: RouterExtensions, private cd: ChangeDetectorRef) {}
+  constructor(private productService: ProductService, private router: RouterExtensions, private cd: ChangeDetectorRef) {}
 
   takePhoto() {
     requestCameraPermissions().then(() => {
@@ -41,18 +41,18 @@ export class AddProductComponent {
     }
 
     const newProduct = {
-      title: this.productName,
-      body: this.productDescription,
-      userId: 1
+      name: this.productName,
+      code: this.productCode,
+      description: this.productDescription,
+      status: 'dostępny',
+      photoPath: this.photoPath
     };
 
-    this.http.post('https://jsonplaceholder.typicode.com/posts', newProduct).subscribe(() => {
-      this.router.back();
-    });
+    this.productService.addProduct(newProduct);
+    this.router.back();
   }
 
   goBack() {
     this.router.back();
   }
 }
-

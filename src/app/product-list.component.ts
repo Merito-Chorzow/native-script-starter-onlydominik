@@ -1,6 +1,7 @@
 import { Component, NO_ERRORS_SCHEMA, ChangeDetectorRef } from '@angular/core';
 import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
-import { HttpClient } from '@angular/common/http';
+import { ProductService } from './product.service';
+import { Page } from '@nativescript/core';
 
 @Component({
   selector: 'app-product-list',
@@ -13,27 +14,26 @@ export class ProductListComponent {
   loaded: boolean = false;
   errorMessage: string = '';
 
-  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
+  constructor(private productService: ProductService, private cd: ChangeDetectorRef, private page: Page) {}
 
   ngOnInit() {
+    this.page.on('navigatedTo', () => {
+      this.refreshProducts();
+    });
     this.loadProducts();
   }
 
   loadProducts() {
     this.loaded = false;
-    this.http.get('https://jsonplaceholder.typicode.com/posts?_limit=10').subscribe((data: any) => {
-      this.products = data.map((item: any) => ({
-        id: item.id,
-        name: item.title.substring(0, 20),
-        code: 'PRD-' + item.id,
-        status: item.id % 2 === 0 ? 'dostepny' : 'niedostepny'
-      }));
-      this.loaded = true;
-      this.cd.detectChanges();
-    }, (error) => {
-      this.errorMessage = 'Blad przy ladowaniu produktow';
+    this.productService.loadProducts().then((data) => {
+      this.products = data;
       this.loaded = true;
       this.cd.detectChanges();
     });
+  }
+
+  refreshProducts() {
+    this.products = this.productService.products;
+    this.cd.detectChanges();
   }
 }
