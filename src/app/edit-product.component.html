@@ -1,0 +1,23 @@
+<ActionBar title="Edytuj produkt">
+  <ActionItem text="Powrot" (tap)="goBack()"></ActionItem>
+</ActionBar>
+
+<StackLayout *ngIf="!loaded" class="p-4">
+  <Label text="Ladowanie..." class="text-center"></Label>
+</StackLayout>
+
+<StackLayout class="p-4" *ngIf="loaded">
+  <Label text="Nazwa produktu:" class="mb-1"></Label>
+  <TextField [(ngModel)]="productName" hint="Wpisz nazwe" class="input border p-2 mb-4"></TextField>
+
+  <Label text="Kod produktu:" class="mb-1"></Label>
+  <TextField [(ngModel)]="productCode" hint="Wpisz kod" class="input border p-2 mb-4"></TextField>
+
+  <Label text="Opis:" class="mb-1"></Label>
+  <TextView [(ngModel)]="productDescription" hint="Wpisz opis" class="input border p-2 mb-4" height="100"></TextView>
+
+  <Label [text]="errorMessage" class="text-red-500 mb-2" *ngIf="errorMessage"></Label>
+
+  <Button text="Zapisz zmiany" (tap)="saveProduct()" class="btn btn-primary"></Button>
+</StackLayout>
+

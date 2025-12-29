@@ -1,0 +1,24 @@
+<ActionBar title="Lista Produktow"></ActionBar>
+
+<StackLayout>
+  <Button text="Dodaj produkt" [nsRouterLink]="['/add']" class="btn btn-primary m-4"></Button>
+
+  <StackLayout *ngIf="!loaded" class="p-4">
+    <Label text="Ladowanie produktow..." class="text-center"></Label>
+  </StackLayout>
+
+  <StackLayout *ngIf="loaded && errorMessage" class="p-4">
+    <Label [text]="errorMessage" class="text-red-500 text-center"></Label>
+  </StackLayout>
+
+  <ListView [items]="products" class="list-group" *ngIf="loaded && !errorMessage">
+    <ng-template let-product="item">
+      <StackLayout [nsRouterLink]="['/detail', product.id]" class="p-4 m-2 bg-white">
+        <Label [text]="product.name" class="font-bold text-lg"></Label>
+        <Label [text]="product.code" class="text-gray-500"></Label>
+        <Label [text]="product.status"></Label>
+      </StackLayout>
+    </ng-template>
+  </ListView>
+</StackLayout>
+

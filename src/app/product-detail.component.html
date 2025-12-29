@@ -1,0 +1,23 @@
+<ActionBar title="Szczegoly produktu">
+  <ActionItem text="Powrot" (tap)="goBack()"></ActionItem>
+</ActionBar>
+
+<StackLayout *ngIf="!loaded" class="p-4">
+  <Label text="Ladowanie..." class="text-center"></Label>
+</StackLayout>
+
+<StackLayout *ngIf="loaded && errorMessage" class="p-4">
+  <Label [text]="errorMessage" class="text-red-500 text-center"></Label>
+</StackLayout>
+
+<StackLayout class="p-4" *ngIf="loaded && !errorMessage && product">
+  <Label [text]="product.name" class="text-2xl font-bold mb-2"></Label>
+  <Label [text]="'Kod: ' + product.code" class="text-gray-500 mb-2"></Label>
+  <Label [text]="'Status: ' + product.status" class="mb-4"></Label>
+  <Label text="Opis:" class="font-bold mb-1"></Label>
+  <Label [text]="product.description" textWrap="true" class="mb-4"></Label>
+
+  <Button text="Edytuj" (tap)="editProduct()" class="btn btn-primary mb-2"></Button>
+  <Button text="Usun" (tap)="deleteProduct()" class="btn bg-red-500 text-white"></Button>
+</StackLayout>
+
